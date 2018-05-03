@@ -13,7 +13,7 @@ using namespace cv;
 using namespace std;
 using namespace cv::xfeatures2d;
 
-//图像分割_function1 RGB+HSI颜色模型初步分割
+
 void colorModel(IplImage *src, IplImage * dst) {
 	int step = NULL;
 	int rows = src->height;
@@ -31,7 +31,7 @@ void colorModel(IplImage *src, IplImage * dst) {
 			float r = dataS[step + 2] / 255.0;
 			float minRGB = min(min(r, g), b);
 			float den = r + g + b;
-			if (den == 0)	//分母不能为0
+			if (den == 0)	
 				S = 0;
 			else
 				S = (1 - 3 * minRGB / den) * 100;
@@ -59,19 +59,19 @@ void colorModel(IplImage *src, IplImage * dst) {
 	}
 }
 
-//图像分割_function2根据分割结果确定轮廓并填充
+
 void fillSeg(IplImage *src, IplImage *tempdst)
 {
 	CvSeq * contour = NULL;
 	CvMemStorage * storage = cvCreateMemStorage();
-	//在二值图像中寻找轮廓,CV_CHAIN_APPROX_SIMPLE - 压缩水平、垂直和对角分割，即函数只保留末端的象素点
+	//CV_CHAIN_APPROX_SIMPLE - 压缩水平、垂直和对角分割
 	cvFindContours(src, storage, &contour, sizeof(CvContour), CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
 	cvZero(tempdst);
 	for (contour; contour != 0; contour = contour->h_next)
 	{
-		//轮廓的方向影响面积的符号。因此函数也许会返回负的结果。应用函数 fabs() 得到面积的绝对值。 
+		
 		double area = cvContourArea(contour, CV_WHOLE_SEQ);
-		//计算整个轮廓或部分轮廓的面积
+		
 		if (fabs(area) < 50)
 		{
 			continue;
@@ -92,26 +92,26 @@ void fillSeg(IplImage *src, IplImage *tempdst)
 	}
 }
 
-//图像分割
+
 IplImage *firecut(IplImage *img)
 {
 
 	//初始化
-	IplImage *colTemp = NULL;	//颜色分割后(有内部空洞)的火焰图片
-	IplImage *gray = NULL;		//灰度图
-	IplImage *mask = NULL;		//二值图，用于复制图像的掩膜
-	IplImage *dst = NULL;		//输出火焰疑似图像，8bit、3通道
+	IplImage *colTemp = NULL;	
+	IplImage *gray = NULL;		
+	IplImage *mask = NULL;		
+	IplImage *dst = NULL;		
 
-	colTemp = cvCreateImage(cvGetSize(img), img->depth, img->nChannels);//经过颜色分割后(有内部空洞)的火焰图片
+	colTemp = cvCreateImage(cvGetSize(img), img->depth, img->nChannels);
 	gray = cvCreateImage(cvGetSize(img), img->depth, 1);
 	mask = cvCreateImage(cvGetSize(img), img->depth, 1);
 	dst = cvCreateImage(cvGetSize(img), img->depth, img->nChannels);		//经过填补后的火焰图片
 	cvZero(dst);
 
-	colorModel(img, colTemp);//function1（见上）
+	colorModel(img, colTemp);
 	cvCvtColor(colTemp, gray, CV_BGR2GRAY);
 
-	fillSeg(gray, mask);//function2(见上)
+	fillSeg(gray, mask);
 	cvCopy(img, dst, mask);
 
 	//cvShowImage("原始图片", img);
