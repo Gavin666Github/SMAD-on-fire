@@ -1,6 +1,7 @@
 # SMAD-on-fire
   Based on the detection of fire in videos, binocular stereo matching technology is used to determine the location of fire sources .
-  
+  We call it SMAD, which means stereo matching and detection on fire.
+  
   # Background
   With the development of modern urban buildings in the direction of large space and high level, the fire source identification and location system that can precisely locate the flame position has a strong practical significance for the prevention and control of fire losses. 
   
