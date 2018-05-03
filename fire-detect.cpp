@@ -42,8 +42,7 @@ int main()
 	return 0;
 }
 
-//The Color Check is According to "An Early Fire-Detection Method Based on Image Processing"  
-//The Author is:Thou-Ho (Chao-Ho) Chen, Ping-Hsueh Wu, and Yung-Chuen Chiou  
+//The Color Check is According to "An Early Fire-Detection Method Based on Image Processing"   
 
 Mat CheckColor(Mat &inImg)
 {
@@ -58,7 +57,7 @@ Mat CheckColor(Mat &inImg)
 		for (int j = 0; j < inImg.cols; j++)
 		{
 			float B, G, R;
-			B = multiRGB[0].at<uchar>(i, j); //每个像素的R,G,B值,动态地址计算法  
+			B = multiRGB[0].at<uchar>(i, j); 
 			G = multiRGB[1].at<uchar>(i, j);
 			R = multiRGB[2].at<uchar>(i, j);
 
@@ -67,7 +66,7 @@ Mat CheckColor(Mat &inImg)
 		
 			double S = (1 - 3.0*minValue / (R + G + B));//
 
-														//R > RT  R>=G>=B  S>=((255-R)*ST/RT)  
+														
 			if (R > redThre &&R >= G && G >= B && S >((255 - R) * saturationTh / redThre))
 			{
 				fireImg.at<uchar>(i, j) = 255;
