@@ -81,7 +81,6 @@ IplImage *r = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
 IplImage *dst = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 3);
 
 
-//颜色分割算法  
 IplImage* process_rgb(IplImage*img) {
 	cvSplit(img, b, g, r, NULL);
 	cvAddWeighted(b, 1.0 / 3.0, g, 1.0 / 3.0, 0.0, g);
@@ -122,9 +121,9 @@ int main(int argc, char* argv[])
 	cvZero(tempdst1);
 	//  cvZero(temp_iamge);  
 	for (; contour != 0; contour = contour->h_next)
-	{   //应用函数 fabs() 得到面积的绝对值。   
+	{      
 		double area = cvContourArea(contour, CV_WHOLE_SEQ);
-		//计算整个轮廓或部分轮廓的面积  
+		  
 		if (fabs(area) < 50)
 		{
 			continue;
