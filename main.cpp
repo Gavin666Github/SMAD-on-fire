@@ -35,7 +35,7 @@ void distance(Mat imgL, Mat imgR);
 
 int main()
 {
-	// 将视频帧转成图片输出  
+	
 	VideoCapture cap("C:\\Users\\a.mp4");
 
 	
@@ -57,7 +57,7 @@ int main()
 		 
 		if (currentFrame % 10 == 0) // 设置每10帧获取一次帧 
 		{
-			imwrite("C:\\Users\\" + str.str(), frame);// 将帧转成图片输出  
+			imwrite("C:\\Users\\" + str.str(), frame);
 		}
 		 
 		if (currentFrame >= totalFrameNumber)
@@ -149,7 +149,7 @@ int FT(Mat &inImg)
 	Mat complexI;
 	merge(planes, 2, complexI);     
 
-	dft(complexI, complexI);        //傅里叶变换
+	dft(complexI, complexI);        
 
 	split(complexI, planes);        //planes[0] = Re(DFT(I),planes[1] = Im(DFT(I))
 									
@@ -159,25 +159,25 @@ int FT(Mat &inImg)
 	magI += Scalar::all(1);
 	log(magI, magI);                //转换到对数尺度(logarithmic scale)
 
-									//如果有奇数行或列，则对频谱进行裁剪
+									
 	magI = magI(Rect(0, 0, magI.cols&-2, magI.rows&-2));
 
-	//重新排列傅里叶图像中的象限，使得原点位于图像中心
+	
 	int cx = magI.cols / 2;
 	int cy = magI.rows / 2;
 
-	Mat q0(magI, Rect(0, 0, cx, cy));       //左上角图像划定ROI区域
-	Mat q1(magI, Rect(cx, 0, cx, cy));      //右上角图像
-	Mat q2(magI, Rect(0, cy, cx, cy));      //左下角图像
-	Mat q3(magI, Rect(cx, cy, cx, cy));     //右下角图像
+	Mat q0(magI, Rect(0, 0, cx, cy));      
+	Mat q1(magI, Rect(cx, 0, cx, cy));      
+	Mat q2(magI, Rect(0, cy, cx, cy));     
+	Mat q3(magI, Rect(cx, cy, cx, cy));     
 
-											//变换左上角和右下角象限
+											
 	Mat tmp;
 	q0.copyTo(tmp);
 	q3.copyTo(q0);
 	tmp.copyTo(q3);
 
-	//变换右上角和左下角象限
+	
 	q1.copyTo(tmp);
 	q2.copyTo(q1);
 	tmp.copyTo(q2);
