@@ -1,5 +1,5 @@
 # SMAD-on-fire
-  Based on the detection of fire in videos, binocular stereo matching technology is used to determine the location of fire sources .
+  Based on the detection of fire, binocular stereo matching technology is used to determine the location of fire sources .
   We call it SMAD, which means stereo matching and detection on fire.
   
   # Background
@@ -10,10 +10,10 @@
   # Our Work
 The main research work is as follows:
 
- 1.Based on the analysis of the image characteristics of the actual fire scenes, aiming at the possible interference factors in the reality, we discuss how to identify the fire phenomena accurately, and design the process of identifying the fire which use multiple criteria.
+ 1.Based on the analysis of the image characteristics of the actual fire scenes,  we discuss how to identify the fire phenomena accurately, and design the process of identifying the fire which use multiple criteria.
 
-2. In the part of fire recognition, the segmentation of foreground image and the feature extraction of flame are realized by using color model and morphological processing. With the extracted spectrum, round degree and other characteristics are used to determine whether a fire is happening. The feasibility of the recognition algorithm is verified by the experiment of fire identification and the analysis of the related results.
+2. In the part of fire detection, the segmentation of foreground image and the feature extraction of flame are realized by using color model and morphological processing. With the extracted spectrum, round degree and other characteristics are used to determine whether a fire is happening. The feasibility of the recognition algorithm is verified by the experiment of fire identification and the analysis of the related results.
 
 3. In the fire location part, we propose an optimized SURF algorithm based on image filling. Through feature extraction and filling of the processed pre segmentation image matching, we candidate matching point. Through screening matching points and the space affine of better matching points, the actual space coordinates of the fire source can be obtained.
 
-4. We design the system architecture which can be put into practical fire source identification and positioning system, and make a prospect for further optimization.
+4. We design the system architecture which can be put into practical fire source detection and location system, and make a prospect for further optimization.
